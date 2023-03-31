@@ -1,3 +1,6 @@
+variable "storage_account_name" {}
+variable "container_name" {}
+variable "key"
 variable "name" {}
 variable "location" {}
 variable "vnetcidr" {}
