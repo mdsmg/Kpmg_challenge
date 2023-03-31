@@ -1,0 +1,42 @@
+---------------------------------------------------------------------------------------------------------------------------------------
+Challenge #2
+We need to write code that will query the meta data of an instance within AWS or Azure or GCP
+and provide a json formatted output.
+The choice of language and implementation is up to you.
+Bonus Points
+The code allows for a particular data key to be retrieved individually
+Hints
+·         Aws Documentation (https://docs.aws.amazon.com/)
+·         Azure Documentation (https://docs.microsoft.com/en-us/azure/?product=featured)
+·         Google Documentation (https://cloud.google.com/docs)
+-------------------------------------------------------------------------------------------------------------------------------------------
+# Define the Azure instance metadata endpoint URL and set the API version to 2021-06-01
+$MetaDataUrl = "http://169.254.169.254/metadata/instance?api-version=2021-06-01"
+
+# Set the Metadata header to true to indicate that metadata should be returned
+$MetadataHeaders = @{ "Metadata" = "true" }
+
+# Use Invoke-WebRequest to retrieve the instance metadata
+$MetadataResponse = Invoke-WebRequest -Uri $MetaDataUrl -Headers $MetadataHeaders
+
+# Convert the metadata response content from JSON to a PowerShell hash table
+$Metadata = $MetadataResponse.Content | ConvertFrom-Json
+
+# Check if a specific metadata key has been requested
+if ($args.Count -gt 0) {
+    $requestedKey = $args[0]
+
+    # Check if the requested key exists in the metadata hash table
+    if ($Metadata.ContainsKey($requestedKey)) {
+        $JsonOutput = @{ $requestedKey = $Metadata[$requestedKey] } | ConvertTo-Json -Depth 99
+        Write-Output $JsonOutput
+    }
+    else {
+        Write-Error "Requested metadata key '$requestedKey' not found"
+    }
+}
+else {
+    # Convert the entire metadata hash table to JSON format
+    $JsonOutput = $Metadata | ConvertTo-Json -Depth 99
+    Write-Output $JsonOutput
+}
