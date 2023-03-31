@@ -1,0 +1,20 @@
+
+#!/bin/bash
+
+# Define the object as a JSON string
+object='{"a":{"b":{"c":"d"}}}'
+
+# Define the key as a string separated by slashes
+key='a/b/c'
+
+# Split the key into an array of individual keys
+IFS='/' read -ra keys <<< "$key"
+
+# Loop through the keys and retrieve the value from the object
+value="$object"
+for k in "${keys[@]}"; do
+  value=$(echo "$value" | jq -r ".\"$k\"")
+done
+
+# Print the final value
+echo "$value"
