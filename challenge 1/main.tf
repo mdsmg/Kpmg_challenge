@@ -39,11 +39,11 @@ module "compute" {
   web_subnet_id = module.networking.websubnet_id
   app_subnet_id = module.networking.appsubnet_id
   web_host_name = var.web_host_name
-  web_username = var.web_username
-  web_os_password = var.web_os_password
+  web_username = data.azurerm_key_vault_secret.web_username.value
+  web_os_password = data.azurerm_key_vault_secret.web_os_password.value
   app_host_name = var.app_host_name
-  app_username = var.app_username
-  app_os_password = var.app_os_password
+  app_username = data.azurerm_key_vault_secret.app_username.value
+  app_os_password = data.azurerm_key_vault_secret.app_os_password.value
 }
 module "database" {
   source = "./modules/database"
@@ -51,6 +51,6 @@ module "database" {
   resource_group = module.resourcegroup.resource_group_name
   database = var.database
   database_version = var.database_version
-  database_admin = var.database_admin
-  database_password = var.database_password
+  database_admin = data.azurerm_key_vault_secret.database_admin.value
+  database_password = data.azurerm_key_vault_secret.database_password.value
 }

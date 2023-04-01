@@ -33,6 +33,7 @@ variable "web_username" {
 variable "web_os_password" {
  type        = string
  description = "web server VM password in Azure"
+   sensitive = true
 }
 variable "app_host_name"{
  type        = string
@@ -45,6 +46,7 @@ variable "app_username" {
 variable "app_os_password" {
  type        = string
  description = "web server VM passwordin Azure"
+   sensitive = true
 }
 variable "database" {
  type        = string
@@ -58,6 +60,7 @@ type        = string
 variable "database_password" {
 type        = string
    description = "database password in Azure"
+   sensitive = true
 }
 variable "database_version" {
 type        = string
