@@ -7,7 +7,7 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "2.40.0"
+      version = "3.49.0"
     }
   }
 }
@@ -68,8 +68,8 @@ module "database" {
   source = "./modules/database"
   location = module.resourcegroup.location_id
   resource_group = module.resourcegroup.resource_group_name
-  primary_database = var.primary_database
-  primary_database_version = var.primary_database_version
-  primary_database_admin = var.primary_database_admin
-  primary_database_password = var.primary_database_password
+  database = var.database
+  database_version = var.database_version
+  database_admin = var.database_admin
+  database_password = var.database_password
 }

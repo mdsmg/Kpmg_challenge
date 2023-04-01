@@ -46,20 +46,20 @@ variable "app_os_password" {
  type        = string
  description = "web server VM passwordin Azure"
 }
-variable "primary_database" {
+variable "database" {
  type        = string
  description = "database name in Azure"
 }
-variable "primary_database_admin" {
+variable "database_admin" {
 
 type        = string
    description = "database admin name in Azure"
 }
-variable "primary_database_password" {
+variable "database_password" {
 type        = string
    description = "database password in Azure"
 }
-variable "primary_database_version" {
+variable "database_version" {
 type        = string
     description = "Database version"
 }
