@@ -1,22 +1,68 @@
-variable "storage_account_name" {}
-variable "container_name" {}
-variable "key" {}
-variable "name" {}
-variable "location" {}
-variable "vnetcidr" {}
-variable "websubnetcidr" {}
-variable "appsubnetcidr" {}
-variable "dbsubnetcidr" {}
-variable "web_host_name"{}
-variable "web_username" {}
-variable "web_os_password" {}
-variable "app_host_name"{}
-variable "app_username" {}
-variable "app_os_password" {}
-variable "primary_database" {}
-variable "primary_database_admin" {}
-variable "primary_database_password" {}
-variable "primary_database_version" {}
+variable "name" {
+type = string
+description = "RG name in Azure"
+}
+variable "location" {
+type        = string
+description = "RG location in Azure"
+}
+variable "vnetcidr" {
+type        = string
+description = "Vnet cidr in Azure"
+}
+variable "websubnetcidr" {
+ type        = string
+ description = "web vm subnet cidr in Azure"
+}
+variable "appsubnetcidr" {
+ type        = string
+ description = "app VM subnet cidr in Azure"
+}
+variable "dbsubnetcidr" {
+ type        = string
+ description = "DB subnet in Azure"
+}
+variable "web_host_name"{
+ type        = string
+  description = "web server VM in Azure"
+}
+variable "web_username" {
+ type        = string
+ description = "web server VM username in Azure"
+}
+variable "web_os_password" {
+ type        = string
+ description = "web server VM password in Azure"
+}
+variable "app_host_name"{
+ type        = string
+ description = "app server VM in Azure"
+}
+variable "app_username" {
+ type        = string
+ description = "web server VM username in Azure"
+}
+variable "app_os_password" {
+ type        = string
+ description = "web server VM passwordin Azure"
+}
+variable "primary_database" {
+ type        = string
+ description = "database name in Azure"
+}
+variable "primary_database_admin" {
+
+type        = string
+   description = "database admin name in Azure"
+}
+variable "primary_database_password" {
+type        = string
+   description = "database password in Azure"
+}
+variable "primary_database_version" {
+type        = string
+    description = "Database version"
+}
 
 
 

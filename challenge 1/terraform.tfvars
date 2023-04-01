@@ -1,6 +1,3 @@
-storage_account_name = "terraform-strgAccntName"
-container_name = "tfstate"
-key = "terraform.tfstate"
 name = "azure-stack"
 location = "East US"
 vnetcidr = "192.168.0.0/16"

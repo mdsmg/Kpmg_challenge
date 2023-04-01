@@ -2,10 +2,33 @@ provider "azurerm" {
   features {}
 }
 
+
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "2.40.0"
+    }
+  }
+}
+
 module "resourcegroup" {
   source         = "./modules/resourcegroup"
   name           = var.name
   location       = var.location
+}
+
+module "storageaccount" {
+  source         = "./modules/storageaccount"
+  resource_group = module.resourcegroup.resource_group_name
+  location       = module.resourcegroup.location_id
+}
+
+module "backend" {
+    source         = "./modules/backend"
+    resource_group_name   = module.resourcegroup.resource_group_name
+    storage_account_name  = module.azurerm_storage_account.storage.name
+    container_name        = module.azurerm_storage_account.container.name
 }
 
 module "networking" {
