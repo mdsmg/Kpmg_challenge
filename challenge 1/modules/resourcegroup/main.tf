@@ -1,4 +1,4 @@
-resource "azurerm_resource_group" "azure-stack-rs" {
+resource "azurerm_resource_group" "azure-rg" {
   name     = var.name
   location = var.location
 }

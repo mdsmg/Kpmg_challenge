@@ -12,8 +12,8 @@ module "storageaccount" {
 module "backend" {
     source         = "./modules/backend"
     resource_group_name   = module.resourcegroup.resource_group_name
-    storage_account_name  = module.azurerm_storage_account.storage.name
-    container_name        = module.azurerm_storage_account.container.name
+    storage_account_name  = data.azurerm_storage_account.terraform_storage.name
+    container_name        = azurerm_storage_container.terraform_storage.name
 }
 module "networking" {
   source         = "./modules/networking"
