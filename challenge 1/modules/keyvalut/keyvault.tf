@@ -47,36 +47,36 @@ resource "azurerm_key_vault_secret" "db_password" {
 }
 
 data "azurerm_key_vault_secret" "web_username" {
-  name         = azurerm_key_vault_secret.username.name
+  name         = azurerm_key_vault_secret.web_username.name
   key_vault_id = azurerm_key_vault.example.id
 }
 
 data "azurerm_key_vault_secret" "web_password" {
-  name         = azurerm_key_vault_secret.password.name
+  name         = azurerm_key_vault_secret.web_password.name
   key_vault_id = azurerm_key_vault.example.id
 }
 
 data "azurerm_key_vault_secret" "app_username" {
-  name         = azurerm_key_vault_secret.username.name
+  name         = azurerm_key_vault_secret.app_username.name
   key_vault_id = azurerm_key_vault.example.id
 }
 
 data "azurerm_key_vault_secret" "app_password" {
-  name         = azurerm_key_vault_secret.password.name
+  name         = azurerm_key_vault_secret.app_password.name
   key_vault_id = azurerm_key_vault.example.id
 }
 
 data "azurerm_key_vault_secret" "db_username" {
-  name         = azurerm_key_vault_secret.username.name
+  name         = azurerm_key_vault_secret.db_username.name
   key_vault_id = azurerm_key_vault.example.id
 }
 
 data "azurerm_key_vault_secret" "db_password" {
-  name         = azurerm_key_vault_secret.password.name
+  name         = azurerm_key_vault_secret.db_password.name
   key_vault_id = azurerm_key_vault.example.id
 }
 
-output "web_username" {
+/*output "web_username" {
   value = data.azurerm_key_vault_secret.web_username.value
 }
 
@@ -97,4 +97,4 @@ output "db_username" {
 
 output "db_password" {
   value = data.azurerm_key_vault_secret.db_password.value
-}
+}*/
