@@ -4,12 +4,6 @@ module "resourcegroup" {
   name           = var.name
   location       = var.location
 }
-module "storageaccount" {
-  source         = "./modules/storageaccount"
-  resource_group = module.resourcegroup.resource_group_name
-  location       = module.resourcegroup.location_id
-}
-
 module "networking" {
   source         = "./modules/networking"
   location       = module.resourcegroup.location_id
