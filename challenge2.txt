@@ -12,15 +12,16 @@ Hints
 -------------------------------------------------------------------------------------------------------------------------------------------
 #!/bin/bash
 
-# Set the metadata service URL
-metadata_url="http://169.254.169.254/metadata/instance?api-version=2021-02-01"
+# Set the metadata URL to retrieve all metadata
+METADATA_URL="http://169.254.169.254/metadata/instance?api-version=2021-04-01"
 
-# Set the key to retrieve
-#key="compute/name"
-key="compute/location"
+# Use curl to retrieve the metadata and format the output as JSON
+METADATA=$(curl -H Metadata:true $METADATA_URL | jq -r '.')
 
-# Query the metadata service and retrieve the key value
-value=$(curl -s -H "Metadata: true" $metadata_url | jq -r ".${key}")
+# Print the JSON-formatted metadata
+echo $METADATA
 
-# Output the key value in JSON format
-echo "{\"${key}\":\"${value}\"}"
+# Retrieve a specific data key
+KEY="compute/location"
+VALUE=$(echo $METADATA | jq -r ".$KEY")
+echo "Value of key '$KEY' is '$VALUE'"
