@@ -10,33 +10,16 @@ Hints
 ·         Azure Documentation (https://docs.microsoft.com/en-us/azure/?product=featured)
 ·         Google Documentation (https://cloud.google.com/docs)
 -------------------------------------------------------------------------------------------------------------------------------------------
-# Define the Azure instance metadata endpoint URL and set the API version to 2021-06-01
-$MetaDataUrl = "http://169.254.169.254/metadata/instance?api-version=2021-06-01"
+#!/bin/bash
 
-# Set the Metadata header to true to indicate that metadata should be returned
-$MetadataHeaders = @{ "Metadata" = "true" }
+# Set the metadata service URL
+metadata_url="http://169.254.169.254/metadata/instance?api-version=2021-02-01"
 
-# Use Invoke-WebRequest to retrieve the instance metadata
-$MetadataResponse = Invoke-WebRequest -Uri $MetaDataUrl -Headers $MetadataHeaders
+# Set the key to retrieve
+key="compute/name"
 
-# Convert the metadata response content from JSON to a PowerShell hash table
-$Metadata = $MetadataResponse.Content | ConvertFrom-Json
+# Query the metadata service and retrieve the key value
+value=$(curl -s -H "Metadata: true" $metadata_url | jq -r ".${key}")
 
-# Check if a specific metadata key has been requested
-if ($args.Count -gt 0) {
-    $requestedKey = $args[0]
-
-    # Check if the requested key exists in the metadata hash table
-    if ($Metadata.ContainsKey($requestedKey)) {
-        $JsonOutput = @{ $requestedKey = $Metadata[$requestedKey] } | ConvertTo-Json -Depth 99
-        Write-Output $JsonOutput
-    }
-    else {
-        Write-Error "Requested metadata key '$requestedKey' not found"
-    }
-}
-else {
-    # Convert the entire metadata hash table to JSON format
-    $JsonOutput = $Metadata | ConvertTo-Json -Depth 99
-    Write-Output $JsonOutput
-}
+# Output the key value in JSON format
+echo "{\"${key}\":\"${value}\"}"
