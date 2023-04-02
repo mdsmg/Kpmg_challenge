@@ -16,7 +16,8 @@ Hints
 metadata_url="http://169.254.169.254/metadata/instance?api-version=2021-02-01"
 
 # Set the key to retrieve
-key="compute/name"
+#key="compute/name"
+key="compute/location"
 
 # Query the metadata service and retrieve the key value
 value=$(curl -s -H "Metadata: true" $metadata_url | jq -r ".${key}")
